@@ -1,0 +1,17 @@
+body {
+  font-family: "Helvetica Neue",HelveticaNeue,Helvetica,Arial,sans-serif;
+}
+
+a:visited {
+  color: #0000ee;
+}
+
+.imgLink {
+  text-decoration: none;
+  display: inline-block;
+  margin: 10px;
+}
+
+#result {
+  white-space: pre-wrap;
+}

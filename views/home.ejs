@@ -1,0 +1,68 @@
+<html>
+<head>
+  <title>OAuth2 Sample App - Intuit</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <h3>Welcome to the Intuit OAuth2 Sample App!</h3>
+  Before using this app, please make sure you do the following:
+  <ul>
+    <li>
+      Update config.json with your Client ID and Client Secret (found on
+      <a href="https://developer.intuit.com">developer.intuit.com</a>
+      )
+    </li>
+
+    <li>
+      In <a href="https://developer.intuit.com">developer.intuit.com</a>,
+      add an allowed Redirect URI to this sample app! (config.json value:
+      <a href="<%= redirectUri %>"><%= redirectUri %></a>
+      )
+    </li>
+  </ul>
+  <br /><br /><br />
+
+
+  <!-- Sign In With Intuit Button -->
+  <b>Sign In With Intuit</b><br />
+  <a class="imgLink" href="#" onclick="launchPopup('/sign_in_with_intuit')">
+    <img
+      style="height: 40px"
+      src="IntuitSignIn-lg-white@2x.jpg"
+    />
+  </a>
+  <br /><br /><br />
+
+  <!-- Connect To QuickBooks Button -->
+  <b>Connect To QuickBooks</b><br />
+  <a class="imgLink" href="#" onclick="launchPopup('/connect_to_quickbooks')">
+    <img
+      style="height: 40px"
+      src="C2QB_white_btn_lg_default.png"
+      onmouseover="this.src='C2QB_white_btn_lg_hover.png'"
+      onmouseout="this.src='C2QB_white_btn_lg_default.png'"
+    />
+  </a>
+  <br /><br /><br />
+
+  <!-- Get App Now -->
+  <b>Get App Now</b><br />
+  <a class="imgLink" href="/connect_handler" style="border: 1px solid grey; padding: 10px">
+    Get App Now
+  </a>
+  <br /><br /><br />
+
+<script>
+  function launchPopup(path) {
+    var win;
+    var checkConnect;
+    var parameters = "location=1,width=800,height=650";
+    parameters += ",left=" + (screen.width - 800) / 2 + ",top=" + (screen.height - 650) / 2;
+
+    // Launch Popup
+    win = window.open(path, 'connectPopup', parameters);
+  }
+</script>
+
+</body>
+</html>
