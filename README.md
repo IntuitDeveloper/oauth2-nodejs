@@ -129,3 +129,7 @@ View these code snippets to see how to correctly pass the access token or client
 #### JWT (ID Token)
 
 `/tools/jwt.js` - For OpenID scopes, after exchanging the authorization code, you will receive a JWT (JSON Web Token) ID Token.  View this code snippet for an example of how to decode, and validate that the ID Token is secure.
+
+#### Troubleshooting
+
+Error: No realmID - make sure to add "com.intuit.quickbooks.accounting" or other relevant scope to "sign_in_with_intuit" in config.json.  To test connectivity, you can also use https://developer.intuit.com/v2/ui#/playground 
