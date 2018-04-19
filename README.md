@@ -1,3 +1,5 @@
+[![Sample Banner](views/Sample.png)][ss1]
+
 ## OAuth 2.0 - Node.js Sample App
 
 The [Intuit Developer team](https://developer.intuit.com) has written this OAuth 2.0 Sample App in Node.js to provide working examples of OAuth 2.0 concepts, and how to integrate with Intuit endpoints.
@@ -129,3 +131,5 @@ View these code snippets to see how to correctly pass the access token or client
 #### JWT (ID Token)
 
 `/tools/jwt.js` - For OpenID scopes, after exchanging the authorization code, you will receive a JWT (JSON Web Token) ID Token.  View this code snippet for an example of how to decode, and validate that the ID Token is secure.
+
+[ss1]: https://help.developer.intuit.com/s/samplefeedback?cid=9010&repoName=oauth2-nodejs
