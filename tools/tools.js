@@ -92,6 +92,37 @@ var Tools = function () {
     })
   }
 
+  //A static function to refresh Token with refresh token. Return the token created.
+  this.refreshTokensWithToken = function(token) {
+    if(!token) {
+      return Promise.reject(new Error('Nil Token passed for refreshTokensWithToken'))
+    }
+
+    request({
+      url: 'https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer',
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Basic ' + tools.basicAuth,
+        'Content-Type' : 'application/x-www-form-urlencoded'
+      },
+      form: {
+        refresh_token: token,
+        grant_type: 'refresh_token'
+      }
+    }, function(err, response) {
+      if(err) {
+        console.log(err)
+        return err
+      }
+
+      var json = JSON.parse(response.body)
+      return tools.intuitAuth.createToken(
+        json.access_token, json.refresh_token,
+        json.token_type, json.x_refresh_token_expires_in
+    })
+  }
+
   this.setScopes = function(flowName) {
     authConfig.scopes = config.scopes[flowName]
     tools.intuitAuth = new ClientOAuth2(authConfig)
