@@ -119,7 +119,7 @@ var Tools = function () {
       var json = JSON.parse(response.body)
       return tools.intuitAuth.createToken(
         json.access_token, json.refresh_token,
-        json.token_type, json.x_refresh_token_expires_in
+        json.token_type, json.x_refresh_token_expires_in)
     })
   }
 
