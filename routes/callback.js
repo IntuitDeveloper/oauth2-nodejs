@@ -5,7 +5,7 @@ var router = express.Router()
 
 /** /callback **/
 router.get('/', function (req, res) {
-  // Verify anti-forgery
+  // Verify anti-forgery 
   if(!tools.verifyAntiForgery(req.session, req.query.state)) {
     return res.send('Error - invalid anti-forgery CSRF response!')
   }
@@ -15,6 +15,8 @@ router.get('/', function (req, res) {
   tools.intuitAuth.code.getToken(req.originalUrl).then(function (token) {
     // Store token - this would be where tokens would need to be
     // persisted (in a SQL DB, for example).
+    console.log("token is");
+    console.log(token);
     tools.saveToken(req.session, token)
     req.session.realmId = req.query.realmId
 

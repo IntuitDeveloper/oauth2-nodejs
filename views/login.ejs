@@ -1,0 +1,37 @@
+<!-- views/pages/auth.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Google SignIn</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+ 
+    <style>
+        body { 
+            padding-top:70px; 
+            }      
+    .facebook {
+      background-color: #3b5998 !important;
+      color: #fff !important;
+    }
+    .fa-facebook-f:before,
+    .fa-facebook:before {
+      content: "\f09a";
+    }
+  </style>    
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron text-center text-primary">
+        <h1><span class="fa fa-lock"></span> Passport Authentication</h1>       
+        <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google"></span> SignIn with Google</a>
+
+        <a href="/auth/facebook" class="waves-effect waves-light btn social facebook">
+            <i class="fa fa-facebook"></i> Sign in with facebook
+        </a>
+    </div>
+</div>
+</body>
+</html> 

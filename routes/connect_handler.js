@@ -16,7 +16,7 @@ router.get('/', function (req, res) {
   })
 
   // Redirect
-  console.log('Redirecting to authorization uri: ' + uri)
+  console.log('Redirecting to authorization uri in connect_handler: ' + uri)
   res.redirect(uri)
 })
 

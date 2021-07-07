@@ -30,7 +30,6 @@ var Tools = function () {
       headers: {
         'Accept': 'application/json'
       }
-
     }, function(err, response) {
       if(err) {
         console.log(err)
@@ -157,7 +156,7 @@ var Tools = function () {
   // In a real use-case, this is where tokens would have to be persisted (to a
   // a SQL DB, for example).  Both access tokens and refresh tokens need to be
   // persisted.  This should typically be stored against a user / realm ID, as well.
-  this.saveToken = function(session, token) {
+  this.saveToken = function(session, token) {    
     session.accessToken = token.accessToken
     session.refreshToken = token.refreshToken
     session.tokenType = token.tokenType
@@ -173,7 +172,6 @@ var Tools = function () {
       session.tokenType, session.data
     )
   }
-
   this.refreshEndpoints()
 }
 

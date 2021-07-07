@@ -1,7 +1,7 @@
 {
-  "clientId": "<enter-client-id>",
-  "clientSecret": "<enter-client-secret>",
-  "redirectUri": "https://<host>/callback",
+  "clientId": "ABZWd9DYtkxIJtJ2Hyeoo3UrQ3r8dpzLgpMfo0RXnySuQgjP6G",
+  "clientSecret": "jj0UN2ciyaeanNG25XnBbZC45EriP9zYiXkfvDGJ",
+  "redirectUri": "http://localhost:3000/callback",
   "configurationEndpoint": "https://developer.api.intuit.com/.well-known/openid_sandbox_configuration/",
   "api_uri": "https://sandbox-quickbooks.api.intuit.com/v3/company/",
   "scopes": {
@@ -13,17 +13,23 @@
       "address"
     ],
     "connect_to_quickbooks": [
-      "com.intuit.quickbooks.accounting",
-      "com.intuit.quickbooks.payment"
+      "com.intuit.quickbooks.accounting"    
     ],
     "connect_handler": [
       "com.intuit.quickbooks.accounting",
-      "com.intuit.quickbooks.payment",
       "openid",
       "profile",
       "email",
       "phone",
       "address"
     ]
-  }
+  },
+  "JWT_SECRET" : "secret",
+"GOOGLE_CLIENT_ID" : "140208493812-t1dc5i0i7badgstio1d41ohtjm1scqco.apps.googleusercontent.com",
+"GOOGLE_CLIENT_SECRET" : "2d-IrOMgFl7Mk0INDuAls7KH",
+"MICROSOFT_CLIENT_ID" : "51e5f1fd-5aaf-42de-ae70-7ede59faad5d",
+"MICROSOFT_CLIENT_SECRET" : "0bad597d-ea69-4f0d-9494-9500877203b4",
+"facebook_clientId" : "342971417402058",
+"facebook_clientSecret" : "29c21c606be35fcd0df59424b19494d8",
+"facebook_callbackUrl" : "http://localhost:3000/auth/facebook/callback"
 }

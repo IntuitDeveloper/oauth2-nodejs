@@ -14,7 +14,7 @@ router.get('/', function (req, res) {
   })
 
   // Redirect
-  console.log('Redirecting to authorization uri: ' + uri)
+  console.log('Redirecting to authorization uri in sign in with qb: ' + uri)
   res.redirect(uri)
 })
 

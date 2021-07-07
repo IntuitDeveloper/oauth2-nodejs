@@ -14,15 +14,18 @@
     "btoa": "^1.1.2",
     "client-oauth2": "^3.2.0",
     "csrf": "^3.0.4",
-    "ejs": "^2.5.2",
+    "ejs": "^2.7.4",
     "expect": "^1.20.2",
-    "express": "^4.14.0",
-    "express-session": "^1.14.2",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
     "fs": "0.0.1-security",
     "https": "^1.0.0",
     "jsonwebtoken": "^7.1.9",
+    "passport": "^0.4.1",
+    "passport-google-oauth": "^2.0.0",
     "path": "^0.12.7",
     "request": "^2.78.0",
-    "rsa-pem-from-mod-exp": "^0.8.4"
+    "rsa-pem-from-mod-exp": "^0.8.4",
+    "passport-facebook": "^3.0.0"
   }
 }
