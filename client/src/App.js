@@ -6,11 +6,12 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import Profile from "./components/Profile";
-import LoginSuccess from './components/LoginSuccess'
-import Login from './components/Login'
-import Landing from './components/Landing'
-
+import Profile from "./components/pages/Profile";
+import LoginSuccess from './components/pages/LoginSuccess'
+import Login from './components/pages/Login'
+import Landing from './components/pages/Landing'
+// connect.sid
+import PrivateRoute from "./PrivateRoute";
 
 const App = ()=> {
   const [userState,setUserState] = useState({
@@ -35,6 +36,9 @@ const App = ()=> {
           <Route exact path="/profile">
             <Profile userState={userState} />
           </Route>
+          {/* <PrivateRoute exact path="/profile">
+            <Profile userState={userState} />
+          </PrivateRoute> */}
         </Switch>
       </div>
     </Router>

@@ -2,70 +2,61 @@ import React, { useState } from 'react'
 import {useHistory} from "react-router-dom";
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import Navbar from './common/Navbar';
-import '../assets/css/common.css'
-import Google from '../assets/icons/google.png'
-import Facebook from '../assets/icons/facebook.png'
-const Login = ({setUserState,setError}) => {
+import Navbar from '../common/Navbar';
+import '../../assets/css/common.css'
+import Google from '../../assets/icons/google.png'
+import Facebook from '../../assets/icons/facebook.png'
+
+import {
+  LoginWithEmailAndPassword,
+  getUserWithCookie,
+} from "../../store/actions/AuthActions";
+import { connect } from "react-redux";
+import Cookies from "js-cookie";
+
+
+
+const Login = (props) => {
     const history = useHistory();
+    const {setUserState,setError} = props;
     const [inputDetails,setInputDetails] = useState({
       email:'',
       password:''
     })
-
-    const fetchAuthUser = async () => {
-        const res = await axios.get("http://localhost:3000/auth/user", { withCredentials: true })
-        .catch((err) => {
-          console.log("Not properly authenticated");
-          setError({
-            show:true,
-            msg:'Not properly authenticated'
-          })
-          setUserState({
-            isLoggedIn:false,
-            user:null
-          })
-          // alert(error.msg)
-    }) 
-        if(res && res.data){
-          setUserState({
-            isLoggedIn:true,
-            user:res.data
-          })
-          console.log(res.data)
-          history.push('/profile')
-        }
-       
-  };
   
-    const socialLogin = async (str) => {
-      let timer: NodeJS.Timeout | null = null;
-      const googleLoginURL = `http://localhost:3000/auth/${str}`;
-      const newWindow = window.open(
-        googleLoginURL,
-        "_blank",
-        "width=500,height=600"
-      );
-  
-      if (newWindow) {
-        timer = setInterval(() => {
-          if (newWindow.closed) {
-            console.log("Yay we're authenticated");
-            fetchAuthUser();
-            if (timer) clearInterval(timer);
-          }
-        }, 500);
-      }
-    };
 
     const handleLoginSubmit = (e) => {
       e.preventDefault();
+      Cookies.remove("connect.sid");
       if(inputDetails.email != '' && inputDetails.password != ''){
-        // alert(inputDetails.email)
-        axios.post('http://localhost:3000/login',inputDetails)
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err.message))
+        props.LoginWithEmailAndPassword(inputDetails.email, inputDetails.password);
       }
+    }
+    const loginWithGoogle = (service) => {
+      Cookies.remove("connect.sid");
+      try{
+        let timer: NodeJS.Timeout | null = null;
+        const AuthUrl = `${process.env.REACT_APP_BACKENDAPI}/auth/${service}`;
+        const newWindow = window.open(
+          AuthUrl,
+          "_blank",
+          "width=500,height=600"
+        );
+        if (newWindow) {  
+          timer = setInterval( async() => {
+            if (newWindow.closed) {
+              console.log("Yay we're authenticated");
+              props.getUserWithCookie()
+              if (timer) clearInterval(timer);
+              console.log("finish")
+            }
+          }, 500);
+        }
+        
+      }catch(err){
+        console.log(err.message)
+      }
+     
     }
 
     return (
@@ -110,8 +101,8 @@ const Login = ({setUserState,setError}) => {
   <div className="social-container">
     <span>Or sign-in with:-</span><br />
     <div className="socialIconsDiv">
-      <img onClick={(e) => socialLogin('google')} src={Google} alt="google-login" className="socialIcon" />
-      <img onClick={(e) => socialLogin('facebook')} src={Facebook} alt="facebook-login" className="socialIcon" />
+      <img onClick={(e) => loginWithGoogle('google')} src={Google} alt="google-login" className="socialIcon" />
+      <img onClick={(e) => loginWithGoogle('facebook')} src={Facebook} alt="facebook-login" className="socialIcon" />
     </div>
   </div>
   </form>
@@ -122,5 +113,12 @@ const Login = ({setUserState,setError}) => {
         </>
     )
 }
+const mapStateToProps = (state) => ({
+  login: state.login,
+  user: state.user,
+});
+export default connect(mapStateToProps, {
+  LoginWithEmailAndPassword,
+  getUserWithCookie,
+})(Login);
 
-export default Login
