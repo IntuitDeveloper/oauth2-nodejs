@@ -1,0 +1,42 @@
+@media only screen and (max-width : 399px) {
+    .wrapper-login-button{
+    width: 10%;
+    }
+}
+.facebook-button{
+    width: 165px;
+    height:35px;  
+    border-radius: 4px;
+    background: #3b5998;
+    color:white;
+    border:0px transparent;  
+    text-align: center;
+    margin:5px;
+    display: inline-block;
+}
+.btn-custom-style{
+    width: 100%;
+    border-radius: 15px;
+}
+.facebook-button:hover{
+    background: #3b5998;
+    opacity: 0.6;
+}
+.social-container{
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.socialIconsDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.socialIcon{
+    margin: 0 10px;
+}

@@ -4,18 +4,25 @@ var express = require('express')
 var session = require('express-session')
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
-var app = express()
+var cors = require('cors')
 
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'ejs')
-app.use(express.static(path.join(__dirname, 'public')))
+var app = express()
+app.use(cors({ origin: "http://localhost:5500", credentials: true }))
+app.use(express.json());
+
 app.use(session({secret: 'secret', resave: 'false', saveUninitialized: 'false'}))
 
+const isUserAuthenticated = (req, res, next) => {
+  if (req.session.passport.user) {
+    next();
+  } else {
+    res.status(401).send("You must login first!");
+  }
+};
+
+
 // Initial view - loads Connect To QuickBooks Button
-app.get('/', function (req, res) {
-  //res.render('home', config)
-  res.render('login', config)
-})
+
 
 
 /*  PASSPORT SETUP  */
@@ -31,6 +38,21 @@ passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
 
+
+const successLoginUrl = "http://localhost:5500/login/success";
+const errorLoginUrl = "http://localhost:5500/login/error";
+
+
+app.get('/auth/user', isUserAuthenticated, (req, res) => {
+  res.status(200).json(req.session.passport.user);
+});
+
+app.post('/login', (req, res) => {
+  console.log(req.body)
+  // res.status(200).json(req.session.passport.user);
+  res.json(req.body)
+});
+
 /*  passport-google-oauth SETUP  */
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const GOOGLE_CLIENT_ID = config.GOOGLE_CLIENT_ID;
@@ -38,7 +60,7 @@ const GOOGLE_CLIENT_SECRET = config.GOOGLE_CLIENT_SECRET;
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/callback"
+    callbackURL: "/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
       userProfile=profile;
@@ -50,18 +72,15 @@ app.get('/auth/google',
   passport.authenticate('google', { scope : ['profile', 'email'] }));
  
 app.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/error' }),
+  passport.authenticate('google', { 
+  failureRedirect: errorLoginUrl,
+  successRedirect: successLoginUrl,
+
+  }),
   function(req, res) {
-    // Successful authentication, redirect success.
-    res.redirect('/success');
-  });
-
-
-  app.get('/success', (req, res) =>{ 
-    //res.send(userProfile); 
-    res.render("profile",{user: userProfile});
-    });
-    app.get('/error', (req, res) => res.send("error logging in"));
+    res.send("Thank you!")
+  }
+);
 
  /*  FacebookStrategy SETUP  */
     passport.use(new FacebookStrategy({
@@ -80,8 +99,8 @@ app.get('/auth/google/callback',
   
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-      successRedirect: '/profile',
-      failureRedirect: '/error'
+      successRedirect: successLoginUrl,
+      failureRedirect: errorLoginUrl
     }));
   
   app.get('/logout', function (req, res) {
@@ -91,28 +110,39 @@ app.get('/auth/google/callback',
 
   app.get('/profile', (req, res) =>{ 
     //res.send(userProfile); 
-    res.render("facebook_profile",{user: userProfile});
-    });
-    app.get('/error', (req, res) => res.send("error logging in"));
+    res.status(200).json(userProfile);
+    // res.render("facebook_profile",{user: userProfile});
+  });
+
+  app.get('/error', (req, res) => res.send("error logging in"));
 
 
-// Sign In With Intuit, Connect To QuickBooks, or Get App Now
-// These calls will redirect to Intuit's authorization flow
+// // Sign In With Intuit, Connect To QuickBooks, or Get App Now
+// // These calls will redirect to Intuit's authorization flow
 app.use('/sign_in_with_intuit', require('./routes/sign_in_with_intuit.js'))
 app.use('/connect_to_quickbooks', require('./routes/connect_to_quickbooks.js'))
 app.use('/connect_handler', require('./routes/connect_handler.js'))
 
-// Callback - called via redirect_uri after authorization
+// // Callback - called via redirect_uri after authorization
 app.use('/callback', require('./routes/callback.js'))
 
-// Connected - call OpenID and render connected view
+// // Connected - call OpenID and render connected view
 app.use('/connected', require('./routes/connected.js'))
 
-// Call an example API over OAuth2
+// // Call an example API over OAuth2
 app.use('/api_call', require('./routes/api_call.js'))
 
+
+
+if(process.env.NODE_ENV == 'production'){
+  app.use(express.static('client/build'))
+  app.use('*', (req,res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+  })
+}
 
 // Start server on HTTP (will use ngrok for HTTPS forwarding)
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
+
