@@ -20,17 +20,33 @@ const Login = (props) => {
     const [inputDetails,setInputDetails] = useState({
       email:'',
       password:''
-    })
+    });
+    const [errormsg , setErrormsg] = useState();
   
 
-    const handleLoginSubmit = (e) => {
+    const handleLoginSubmit = async(e) => {
       e.preventDefault();
       Cookies.remove("connect.sid");
       if(inputDetails.email != '' && inputDetails.password != ''){
-        props.LoginWithEmailAndPassword(inputDetails.email, inputDetails.password);
-        history.push("/profile")
+      var result = await props.LoginWithEmailAndPassword(inputDetails.email, inputDetails.password);
+      var log_user = JSON.parse(localStorage.getItem("user"));
+      console.log("log_user = "+log_user.username);    
+      
+        //history.push("/profile")
+        if(log_user.username != null && log_user.username != "")
+        {
+        history.push({ 
+          pathname: '/profile',
+          state: {"username" : log_user.username}
+         });
+        }
+        else
+        {
+          setErrormsg("Login Failed");
+        }
       }
     }
+  
     // const loginWithGoogle = (service) => {
     //   Cookies.remove("das");
     //   try{
@@ -64,7 +80,6 @@ const Login = (props) => {
       <div className="container-main">
   <div className="container container-main col-xxl-8 px-4">
     <main className="form-signin">
-  
   <form onSubmit={(e) => handleLoginSubmit(e)}>
     <h1 className="h3 mb-3 fw-normal text-center mt-5">Welcome Back</h1>
     <div className="form-floating">
@@ -89,6 +104,11 @@ const Login = (props) => {
         />
       <label for="floatingPassword">Password</label>
     </div>
+    <label className="error_color">
+    {errormsg}
+      </label>	
+    
+   
     <div className="checkbox mb-3">
       <label>
         <Link to="#" className="small-text">Forgot Password?</Link>

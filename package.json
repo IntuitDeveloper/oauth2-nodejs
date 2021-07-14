@@ -30,10 +30,11 @@
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth": "^2.0.0",
+    "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "request": "^2.78.0",
     "rsa-pem-from-mod-exp": "^0.8.4",
-    "validator": "^13.6.0"    
+    "validator": "^13.6.0"
   },
   "devDependencies": {
     "http-proxy-middleware": "^2.0.1",

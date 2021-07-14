@@ -9,6 +9,8 @@ class AuthServices {
       }
     try {
         const apiResponse = await axios.post(url,body,{headers: headers});
+        console.log("login response = ",JSON.stringify(apiResponse.data));
+        localStorage.setItem('user', JSON.stringify(apiResponse.data))
         return apiResponse.data;
       } catch (err) {
     }
