@@ -1,0 +1,19 @@
+{
+    "how-it-works":[
+        {
+            "head": "01",
+            "data": "Connect",
+            "data2": "One-click integration to 20+ payment services and accounting apps."
+        },
+        {
+            "head": "02",
+            "data": "Sync",
+            "data2": "Select a Customer or Invoice that was synced in QuickBooks and process a payment."
+        },
+        {
+            "head": "03",
+            "data": "Automate",
+            "data2": "Check the invoice in your accounting app is paid, repeat as needed or automate."
+        }
+    ]
+}

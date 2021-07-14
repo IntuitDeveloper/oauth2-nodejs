@@ -4,8 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run client\" \"nodemon app.js\""
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +15,7 @@
     "atob": "^2.0.3",
     "btoa": "^1.1.2",
     "client-oauth2": "^3.2.0",
+    "concurrently": "^6.2.0",
     "cors": "^2.8.5",
     "csrf": "^3.0.4",
     "ejs": "^2.7.4",
@@ -30,6 +33,10 @@
     "path": "^0.12.7",
     "request": "^2.78.0",
     "rsa-pem-from-mod-exp": "^0.8.4",
-    "validator": "^13.6.0"
+    "validator": "^13.6.0"    
+  },
+  "devDependencies": {
+    "http-proxy-middleware": "^2.0.1",
+    "nodemon": "^2.0.12"
   }
 }
