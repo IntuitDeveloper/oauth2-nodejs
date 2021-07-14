@@ -1,0 +1,151 @@
+{
+    "how-it-works":[
+        {
+            "head": "01",
+            "data1": "Connect",
+            "data2": "One-click integration to 20+ payment services and accounting apps."
+        },
+        {
+            "head": "02",
+            "data1": "Sync",
+            "data2": "Select a Customer or Invoice that was synced in QuickBooks and process a payment."
+        },
+        {
+            "head": "03",
+            "data1": "Automate",
+            "data2": "Check the invoice in your accounting app is paid, repeat as needed or automate."
+        }
+    ],
+    "client-images": [
+        {
+            "url": "client-1.png"
+        },
+        {
+            "url": "client-2.png"
+        },
+        {
+            "url": "client-3.png"
+        },
+        {
+            "url": "client-4.png"
+        },
+        {
+            "url": "client-5.png"
+        },
+        {
+            "url": "client-6.png"
+        }
+    ],
+    "connect-your-payments":[
+        {
+            "icon":"",
+            "head":"Customer Vault",
+            "data":"Store multiple credit cards or checking accounts for your customers in our PCI compliant vault."
+        },
+        {
+            "icon":"",
+            "head":"eInvoicing & Notifications",
+            "data":"Create automated payment reminder emails with \"Pay Now\" links to make collections a breeze."
+        },
+        {
+            "icon":"",
+            "head":"Subscription Management",
+            "data":"Setup and manage multiple subscription billing models, from free trials, to one-time charges."
+        },
+        {
+            "icon":"",
+            "head":"Surcharging",
+            "data":"Built-in surcharging safely charges credit cards only. Ensures compliance by not charging debit cards."
+        },
+        {
+            "icon":"",
+            "head":"Developer Friendly API",
+            "data":"Integrate your applications quickly and easily with our intuitive REST API."
+        }
+    ],
+    "footer-column":[
+        {
+            "head":"Work With Us",
+            "lists":[
+                {
+                    "name":"Pricing",
+                    "link":"login"
+                },
+                {
+                    "name":"Investor Inquiries",
+                    "link":"#"
+                },
+                {
+                    "name":"ISO Solutions",
+                    "link":"#"
+                },
+                {
+                    "name":"Support Desk",
+                    "link":"#"
+                },
+                {
+                    "name":"Contact Us",
+                    "link":"#"
+                }
+            ]
+        },
+        {
+            "head":"Features",
+            "lists":[
+                {
+                    "name":"Payment Terminal",
+                    "link":"#"
+                },
+                {
+                    "name":"eInvoicing",
+                    "link":"#"
+                },
+                {
+                    "name":"Surcharging",
+                    "link":"#"
+                },
+                {
+                    "name":"Customer Vault",
+                    "link":"#"
+                },
+                {
+                    "name":"Subscription Management",
+                    "link":"#"
+                },
+                {
+                    "name":"Credit Card Processing",
+                    "link":"#"
+                }
+            ]
+        },
+        {
+            "head":"Company",
+            "lists":[
+                {
+                    "name":"About Us",
+                    "link":"#"
+                },
+                {
+                    "name":"FAQs",
+                    "link":"#"
+                },
+                {
+                    "name":"Blog",
+                    "link":"#"
+                },
+                {
+                    "name":"PCI Compliance",
+                    "link":"#"
+                },
+                {
+                    "name":"Privacy",
+                    "link":"#"
+                },
+                {
+                    "name":"Terms",
+                    "link":"#"
+                }
+            ]
+        }
+    ]
+}

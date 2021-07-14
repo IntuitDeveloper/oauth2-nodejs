@@ -11,6 +11,10 @@ export const Store = createStore(
   initialState,
   compose(
     applyMiddleware(...middlewares),
+<<<<<<< HEAD
     //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+=======
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+>>>>>>> 1213662a6d7ae46ac8db714d30bd338576c7f545
   )
 );

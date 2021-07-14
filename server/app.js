@@ -2,7 +2,11 @@ var config = require('./config.json')
 var express = require('express')
 var session = require('express-session')
 var cors = require('cors')
+const passport = require('passport');
+const OAuthRouter = require('./routes/OAuthRouter');
 var app = express()
+
+
 app.use(cors({ origin: "http://localhost:5500", credentials: true }))
 app.use(express.json());
 app.use(session({secret: 'secret', resave: 'false', saveUninitialized: 'false'}))
@@ -62,18 +66,14 @@ async function findUser(username) {
 var userProfile;
 app.use(passport.initialize());
 app.use(passport.session());
-
 passport.serializeUser(function(user, cb) {
   cb(null, user);
 });
-
 passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
 
 
-const successLoginUrl = "http://localhost:5500/login/success";
-const errorLoginUrl = "http://localhost:5500/login/error";
 const isUserAuthenticated = (req, res, next) => {
 if (req.session.passport.user) {
     next();
@@ -82,56 +82,7 @@ if (req.session.passport.user) {
   }
 };
 
-/*  passport-google-oauth SETUP  */
-const GOOGLE_CLIENT_ID = config.GOOGLE_CLIENT_ID;
-const GOOGLE_CLIENT_SECRET = config.GOOGLE_CLIENT_SECRET;
-passport.use(new GoogleStrategy({
-    clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "/auth/google/callback",
-    proxy: true,
-  },
-  function(accessToken, refreshToken, profile, done) {
-      userProfile=profile;
-      return done(null, userProfile);
-  }
-));
- 
-app.get('/auth/google', 
-  passport.authenticate('google', { scope : ['profile', 'email'] }));
- 
-app.get('/auth/google/callback', 
-  passport.authenticate('google', { 
-  failureRedirect: errorLoginUrl,
-  successRedirect: successLoginUrl,
-  }),
-  function(req, res) {
-    res.send("Thank you!")
-  }
-);
-
- /*  FacebookStrategy SETUP  */
-    passport.use(new FacebookStrategy({
-      clientID: config.facebook_clientId,
-      clientSecret: config.facebook_clientSecret,
-      callbackURL: config.facebook_callbackUrl
-    }, function (accessToken, refreshToken, profile, done) {
-      userProfile = profile;
-      return done(null, userProfile);
-    }
-  ));
-
-  app.get('/auth/facebook', passport.authenticate('facebook', {
-    scope: ['public_profile']
-  }));
-  
-  app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {
-      successRedirect: successLoginUrl,
-      failureRedirect: errorLoginUrl
-    }));
-
-
+  app.use('/auth', OAuthRouter);
   app.get('/api/user', isUserAuthenticated, (req, res) => {
     res.status(200).json(req.session.passport.user);
   });
@@ -189,7 +140,7 @@ app.use('/api_call', require('./routes/api_call.js'))
 //   app.use(express.static('client/build'))
 //   const path = require('path');
 //   app.use('*', (req,res) => {
-//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+//     res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'))
 //   })
 // }
 
