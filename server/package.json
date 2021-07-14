@@ -4,10 +4,14 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run client\" \"nodemon app.js\""
+    "server": "nodemon server.js",
+    "client": "cd .. && cd client && npm run start",
+    "client-install": "cd .. && cd client && npm install",
+    "server-install": "npm install",
+    "install-all": "concurrently \"npm run client-install\" \"npm run server-install\"",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
   },
   "author": "",
   "license": "ISC",
@@ -33,7 +37,6 @@
     "rsa-pem-from-mod-exp": "^0.8.4"
   },
   "devDependencies": {
-    "http-proxy-middleware": "^2.0.1",
     "nodemon": "^2.0.12"
   }
 }
