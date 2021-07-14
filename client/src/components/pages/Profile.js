@@ -1,23 +1,22 @@
 import React,{useEffect} from 'react'
 import {useHistory} from "react-router-dom";
-import axios from 'axios'
+import { connect } from "react-redux";
 
-const Profile = ({userState}) => {
+const Profile = (props) => {
     const history = useHistory();
-    console.log(userState)
 
-    useEffect(() => {
-        if(userState.isLoggedIn ===false){
-            history.push('/login')
-        }
-    },[])
+    // useEffect(() => {
+    //     if(props.auth.success === false || props.auth.user == null){
+    //         history.push('/login')
+    //     }
+    // },[])
 
-    if(userState.user === null){
+    if(props.auth.loading === true){
         return "Loading"
     }else{
     return (
         <div>
-            Welcome  {userState.user.displayName}
+            Welcome  {props.auth.user.displayName?props.auth.user.displayName:"User"}
             <br />
             {/* <button onClick={handleQuickBookConnect}>Connect To QuickBooks</button> */}
         </div>
@@ -25,4 +24,8 @@ const Profile = ({userState}) => {
 }
 }
 
-export default Profile
+const mapStateToProps = (state) => ({
+    auth: state.auth
+  });
+  export default connect(mapStateToProps)(Profile);
+  
