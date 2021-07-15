@@ -10,7 +10,6 @@ var app = express()
 app.use(cors({ origin: "http://localhost:5500", credentials: true }))
 app.use(express.json());
 app.use(session({secret: 'secret', resave: 'false', saveUninitialized: 'false'}))
-const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 var LocalStrategy  = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
