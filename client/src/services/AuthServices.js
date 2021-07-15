@@ -2,7 +2,7 @@ import axios from "axios";
 
 class AuthServices {
   static async loginWithEmailAndPassword(email,password) {
-    const url = `/api/login`;
+    const url = `/auth/login`;
     const body = {email,password};
     const headers = {
         'Content-Type': 'application/json'
@@ -20,7 +20,7 @@ class AuthServices {
     }
   }
   static async getUserWithCookie() {
-    const url = `/api/user`;
+    const url = `/auth/user`;
     try {
       const Response = await axios.get(url, { withCredentials: true });
       if(Response && Response.data){
