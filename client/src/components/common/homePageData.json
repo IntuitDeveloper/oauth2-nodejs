@@ -38,27 +38,27 @@
     ],
     "connect-your-payments":[
         {
-            "icon":"",
+            "icon":"customer-vault.png",
             "head":"Customer Vault",
             "data":"Store multiple credit cards or checking accounts for your customers in our PCI compliant vault."
         },
         {
-            "icon":"",
+            "icon":"einvoicing.png",
             "head":"eInvoicing & Notifications",
             "data":"Create automated payment reminder emails with \"Pay Now\" links to make collections a breeze."
         },
         {
-            "icon":"",
+            "icon":"subscription.png",
             "head":"Subscription Management",
             "data":"Setup and manage multiple subscription billing models, from free trials, to one-time charges."
         },
         {
-            "icon":"",
+            "icon":"surcharge.png",
             "head":"Surcharging",
             "data":"Built-in surcharging safely charges credit cards only. Ensures compliance by not charging debit cards."
         },
         {
-            "icon":"",
+            "icon":"api.png",
             "head":"Developer Friendly API",
             "data":"Integrate your applications quickly and easily with our intuitive REST API."
         }

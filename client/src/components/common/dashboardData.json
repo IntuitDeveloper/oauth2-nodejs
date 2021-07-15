@@ -1,0 +1,87 @@
+{
+    "aside-menu":[
+        {
+            "name": "Dashboard",
+            "link": "#",
+            "icon": "mdi mdi-av-timer"
+        },
+        {
+            "name": "Credit Card",
+            "link": "#",
+            "icon": "mdi mdi-credit-card"
+        },
+        {
+            "name": "Customers",
+            "link": "#",
+            "icon": "mdi mdi-account-multiple"
+        },
+        {
+            "name": "Subscriptions & Plans",
+            "link": "#",
+            "icon": "mdi mdi-view-grid"
+        },
+        {
+            "name": "Invoices",
+            "link": "#",
+            "icon": "mdi mdi-view-list"
+        },
+        {
+            "name": "Transactions",
+            "link": "#",
+            "icon": "mdi mdi-view-sequential"
+        },
+        {
+            "name": "Products & Services",
+            "link": "#",
+            "icon": "mdi mdi-format-list-bulleted"
+        },
+        {
+            "name": "Reports",
+            "link": "#",
+            "icon": "mdi mdi-chart-bar"
+        },
+        {
+            "name": "Configuration",
+            "link": "#",
+            "icon": "mdi mdi-vector-combine"
+        },
+        {
+            "name": "Integrations",
+            "link": "#",
+            "icon": "mdi mdi-server"
+        }
+    ],
+    "payments":[
+        {
+            "customerName":"Elite admin",
+            "invoice":"121212",
+            "date":"April 18, 2021",
+            "amount":"$24"
+        },
+        {
+            "customerName":"Real Homes WP Theme",
+            "invoice":"131313",
+            "date":"April 19, 2021",
+            "amount":"$1250"
+        },
+        {
+            "customerName":"Ample Admin",
+            "invoice":"141414",
+            "date":"April 19, 2021",
+            "amount":"$1250"
+        },
+        {
+            "customerName":"Medical Pro WP Theme",
+            "invoice":"151515",
+            "date":"April 20, 2021",
+            "amount":"-$24"
+        },
+        {
+            "customerName":"Hosting press html",
+            "invoice":"161616",
+            "date":"April 21, 2021",
+            "amount":"$24"
+        }
+
+    ]
+}

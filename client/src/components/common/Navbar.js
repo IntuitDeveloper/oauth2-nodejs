@@ -22,7 +22,7 @@ const Navbar = () => {
                 <Link to="#" className="nav-link" >Pricing</Link>
             </li>
 			</ul>
-            <Link to="#" to="#" className="d-none d-lg-block"  style={{paddingLeft: "70px",paddingRight: "70px"}}><img src="https://codingyaar.com/wp-content/uploads/logo.png"/></Link>
+            <Link to="#" to="/dashboard" className="d-none d-lg-block"  style={{paddingLeft: "70px",paddingRight: "70px"}}><img src="https://codingyaar.com/wp-content/uploads/logo.png"/></Link>
         <ul className="navbar-nav mx-auto pull-right">           
 		   <li className="nav-item" style={{paddingLeft:"45px"}}>
                 <Link to="/login" className="nav-link" href="signin.html">Sign In</Link>

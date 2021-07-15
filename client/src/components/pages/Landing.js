@@ -1,10 +1,9 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import Navbar from '../common/Navbar'
 import Footer from '../common/Footer'
 import data from "../common/homePageData.json"
 
 const Landing = () => {
-    console.log(data["how-it-works"][0].head)
     return (
         <div>
             <h1 className="visually-hidden">Heroes examples</h1>
@@ -130,10 +129,11 @@ const Clients = ({item}) => {
 const ConnectYourPayments = ({item}) => {
   return (
     <div className="col d-flex align-items-start">
-      <svg xmlns="http://www.w3.org/2000/svg" width="55" height="16" fill="currentColor" className="bi bi-wallet-fill" viewBox="0 0 16 16" style={{marginTop: "5px",marginRight: "6px"}}>
+      <img src={`${process.env.PUBLIC_URL}/images/${item.icon}`} alt="" />
+      {/* <svg xmlns="http://www.w3.org/2000/svg" width="55" height="16" fill="currentColor" className="bi bi-wallet-fill" viewBox="0 0 16 16" style={{marginTop: "5px",marginRight: "6px"}}>
         <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v2h6a.5.5 0 0 1 .5.5c0 .253.08.644.306.958.207.288.557.542 1.194.542.637 0 .987-.254 1.194-.542.226-.314.306-.705.306-.958a.5.5 0 0 1 .5-.5h6v-2A1.5 1.5 0 0 0 14.5 2h-13z"/>
         <path d="M16 6.5h-5.551a2.678 2.678 0 0 1-.443 1.042C9.613 8.088 8.963 8.5 8 8.5c-.963 0-1.613-.412-2.006-.958A2.679 2.679 0 0 1 5.551 6.5H0v6A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-6z"/>
-      </svg>
+      </svg> */}
       <div style={{marginLeft: "5px"}}>
         <h4 className="fw-bold mb-0">{item.head}</h4>
         <p>{item.data}</p>
