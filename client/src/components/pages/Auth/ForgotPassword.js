@@ -53,6 +53,9 @@ const Login = (props) => {
     <div className="checkbox mb-3">
       <label>
         <Link to="/login" className="small-text">Login Instead.</Link>
+      </label>
+      <label>
+        <Link to="/reset-password/ss" className="small-text">Reset Instead.</Link>
       </label>	    
     </div>
   </form>

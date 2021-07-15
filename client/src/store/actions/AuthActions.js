@@ -51,9 +51,9 @@ import {
       // });
     };
   }
-  export function resetPassword(password,confirmPassword) {
+  export function resetPassword(password,confirmPassword,token) {
     return async (dispatch) => {
-      const response = await AuthServices.resetPassword(password,confirmPassword);
+      const response = await AuthServices.resetPassword(password,confirmPassword,token);
       // dispatch({
       //   type: RESET_PASSWORD,
       //   payload: email

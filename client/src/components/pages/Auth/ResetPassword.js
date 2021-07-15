@@ -12,6 +12,8 @@ import { connect } from "react-redux";
 
 const Login = (props) => {
     const history = useHistory();
+    const {token} = props.match.params;
+    console.log(token)
     const [resetDetails,setResetDetails] = useState({
         password: '',
         confirmPassword: ''
@@ -24,7 +26,7 @@ const Login = (props) => {
       if(resetDetails.password != '' && resetDetails.confirmPassword != ''){
         //history.push("/profile")
         console.log(resetDetails)
-        props.resetPassword(resetDetails.password,resetDetails.confirmPassword)
+        props.resetPassword(resetDetails.password,resetDetails.confirmPassword,token)
       }
     }
 
