@@ -28,17 +28,14 @@ const Login = (props) => {
       e.preventDefault();
       Cookies.remove("connect.sid");
       if(inputDetails.email != '' && inputDetails.password != ''){
-      var result = await props.LoginWithEmailAndPassword(inputDetails.email, inputDetails.password);
-      var log_user = JSON.parse(localStorage.getItem("user"));
-      console.log("log_user = "+log_user);    
-      
-        //history.push("/profile")
-        if(log_user != null && log_user.username != null && log_user.username != "")
+      await props.LoginWithEmailAndPassword(inputDetails.email, inputDetails.password);
+      var log_user = JSON.parse(localStorage.getItem("user"));        
+        if(log_user != null && log_user.email != null && log_user.email != "")
         {
           setErrormsg("");
         history.push({ 
           pathname: '/profile',
-          state: {"username" : log_user.username}
+          state: {"username" : log_user.email}
          });
         }
         else

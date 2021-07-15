@@ -2,14 +2,14 @@ var config = require('./config.json')
 var express = require('express')
 var session = require('express-session')
 var cors = require('cors')
-const passport = require('passport');
+var jwt = require('jsonwebtoken');
 const OAuthRouter = require('./routes/OAuthRouter');
 var app = express()
-
 
 app.use(cors({ origin: "http://localhost:5500", credentials: true }))
 app.use(express.json());
 app.use(session({secret: 'secret', resave: 'false', saveUninitialized: 'false'}))
+const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 var LocalStrategy  = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
@@ -102,15 +102,23 @@ if (req.session.passport.user) {
     //res.json(req.body)
     const result = await VerifyUser(login_detail.email);    
     console.log("result = "+result);
+    
     if(!result)
     {
       console.log("user not found");    
+      res.status(200).send({ success: false, message: "User Not Found" })
     }
     else
     {
-      console.log("user found");
+      var login_user = {email: result.username, password : result.password}
+      console.log("user found ",login_user);
+      console.log("process.env.JWT_SECRET = "+config.JWT_SECRET);
+      var token = jwt.sign(login_user, config.JWT_SECRET || "", {
+        expiresIn: 30000,
+      });
+      res.send({ success: true, token, user: login_user });
     }
-    res.send(result);    
+   // res.send(result);    
   });
   app.get('/api/logout', function (req, res) {
     req.logout();

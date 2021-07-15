@@ -12,12 +12,25 @@ const Profile = (props) => {
     //     }
     // },[])
 
+    const handleLogout = () =>{
+        if(props.auth.user != null)
+        {
+
+        }
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        history.push('/login');
+    }
+
     if(props.auth.loading === true){
         return "Loading"
     }else{
     return (        
         <div>            
-            Welcome {location.state.username}
+            Welcome { props.auth.user != null && props.auth.user.displayName?props.auth.user.displayName: location.state.username}         
+        <button onClick={handleLogout}>Logout</button> 
+
+           
             {/* { props.auth.user != null && props.auth.user.displayName?props.auth.user.displayName:"User"} */}
               
             <br />
