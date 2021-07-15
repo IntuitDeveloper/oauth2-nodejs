@@ -10,7 +10,7 @@ import {
   LoginWithEmailAndPassword,
   getUserWithCookie,
 } from "../../store/actions/AuthActions";
-import { connect } from "react-redux";
+import { connect ,useDispatch, useSelector} from "react-redux";
 import Cookies from "js-cookie";
 
 
@@ -30,11 +30,12 @@ const Login = (props) => {
       if(inputDetails.email != '' && inputDetails.password != ''){
       var result = await props.LoginWithEmailAndPassword(inputDetails.email, inputDetails.password);
       var log_user = JSON.parse(localStorage.getItem("user"));
-      console.log("log_user = "+log_user.username);    
+      console.log("log_user = "+log_user);    
       
         //history.push("/profile")
-        if(log_user.username != null && log_user.username != "")
+        if(log_user != null && log_user.username != null && log_user.username != "")
         {
+          setErrormsg("");
         history.push({ 
           pathname: '/profile',
           state: {"username" : log_user.username}
