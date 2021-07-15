@@ -40,3 +40,7 @@
 .socialIcon{
     margin: 0 10px;
 }
+
+.error_color{
+    color : red;
+}
