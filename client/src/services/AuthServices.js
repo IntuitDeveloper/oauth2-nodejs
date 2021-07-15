@@ -27,30 +27,30 @@ class AuthServices {
   }
 }
 static async sendResetLinkToEmail(email) {
-  const url = `/api/generateResetLink`;
+  const url = `/auth/getResetPassLink`;
   const body = {email};
   try {
-    console.log(body)
-    return body;
-    // const response = await axios.post(url,body);
-    //   console.log(response)
-    //   return response
+    const response = await axios.post(url,body);
+      console.log(response)
+      return response
   } catch (err) {
-    console.log("Error Sending Link!");
+    console.log(err.message);
   }
 }
 
-static async resetPassword(password,confirmPassword) {
-  const url = `/api/reset-password`;
-  const body = {password,confirmPassword};
+static async resetPassword(password,confirmPassword,token) {
+  const url = `/auth/reset-password`;
+  const body = {
+    password,
+    confirmPassword,
+    token
+  };
   try {
-    console.log(body)
-    return body;
-    // const response = await axios.post(url,body);
-    //   console.log(response)
-    //   return response
+    const response = await axios.post(url,body);
+      console.log(response)
+      return response
   } catch (err) {
-    console.log("Error Sending Link!");
+    console.log(err.message);
   }
 }
 

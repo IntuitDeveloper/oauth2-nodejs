@@ -4,13 +4,13 @@ import Breadcrumb from './Breadcrumb'
 import Navbar from "./Navbar"
 import RecentPaymens from './RecentPaymens'
 import Revenue from './Revenue'
-import "../../../assets/css/style.min.css"
+// import "../../../assets/css/style.min.css"
 import $ from "jquery";
 
 const Dashboard = () => {
-    if(window.location.pathname === "/dashboard"){
-        require("../../../assets/css/style.min.css")
-    }
+    // if(window.location.pathname === "/dashboard"){
+    //     require("../../../assets/css/style.min.css")
+    // }
 
         // useEffect(()=>{
         //     var loadScript = function (src) {
