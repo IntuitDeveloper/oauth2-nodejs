@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import {useHistory} from "react-router-dom";
 import { Link } from 'react-router-dom'
-import Navbar from '../common/Navbar';
-import '../../assets/css/common.css'
-import Google from '../../assets/icons/google.png'
-import Facebook from '../../assets/icons/facebook.png'
+import Navbar from '../../common/Navbar';
+import '../../../assets/css/common.css'
+import Google from '../../../assets/icons/google.png'
+import Facebook from '../../../assets/icons/facebook.png'
 
 import {
   LoginWithEmailAndPassword,
   getUserWithCookie,
-} from "../../store/actions/AuthActions";
+} from "../../../store/actions/AuthActions";
 import { connect } from "react-redux";
 import Cookies from "js-cookie";
 
@@ -111,7 +111,7 @@ const Login = (props) => {
    
     <div className="checkbox mb-3">
       <label>
-        <Link to="#" className="small-text">Forgot Password?</Link>
+        <Link to="/forgot-password" className="small-text">Forgot Password?</Link>
       </label>	    
     </div>
 	<div className="text-center">

@@ -26,6 +26,33 @@ class AuthServices {
       console.log("Not properly authenticated");
   }
 }
+static async sendResetLinkToEmail(email) {
+  const url = `/api/generateResetLink`;
+  const body = {email};
+  try {
+    console.log(body)
+    return body;
+    // const response = await axios.post(url,body);
+    //   console.log(response)
+    //   return response
+  } catch (err) {
+    console.log("Error Sending Link!");
+  }
+}
+
+static async resetPassword(password,confirmPassword) {
+  const url = `/api/reset-password`;
+  const body = {password,confirmPassword};
+  try {
+    console.log(body)
+    return body;
+    // const response = await axios.post(url,body);
+    //   console.log(response)
+    //   return response
+  } catch (err) {
+    console.log("Error Sending Link!");
+  }
+}
 
   static async updateUser(user) {
 

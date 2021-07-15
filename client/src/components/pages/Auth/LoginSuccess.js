@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import {
   getUserWithCookie
-} from "../../store/actions/AuthActions";
+} from "../../../store/actions/AuthActions";
 import { connect } from "react-redux";
 import {useHistory} from "react-router-dom";
 

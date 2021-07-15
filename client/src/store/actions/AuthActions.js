@@ -42,11 +42,21 @@ import {
     };
   }
   
-  // export function resetPassword({ email }) {
-  //   return (dispatch) => {
-  //     dispatch({
-  //       payload: email,
-  //       type: RESET_PASSWORD,
-  //     });
-  //   };
-  // }
+  export function sendResetLinkToEmail(email) {
+    return async (dispatch) => {
+      const response = await AuthServices.sendResetLinkToEmail(email);
+      // dispatch({
+      //   type: RESET_PASSWORD,
+      //   payload: email
+      // });
+    };
+  }
+  export function resetPassword(password,confirmPassword) {
+    return async (dispatch) => {
+      const response = await AuthServices.resetPassword(password,confirmPassword);
+      // dispatch({
+      //   type: RESET_PASSWORD,
+      //   payload: email
+      // });
+    };
+  }
