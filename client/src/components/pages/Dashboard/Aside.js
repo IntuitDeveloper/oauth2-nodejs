@@ -5,27 +5,26 @@ import { Link } from 'react-router-dom'
 const Aside = () => {
    
     return (
-        <div className="scroll-sidebar">
-                <nav className="sidebar-nav">
-                    <ul id="sidebarnav">
-                        {Data["aside-menu"].map(item => (
-                            <MenuList item={item} />
-                        ))}
-                    </ul>
-                </nav>
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+            <div class="position-sticky pt-3">
+                <ul class="nav flex-column">
+                    {Data["aside-menu"].map(item => (
+                        <MenuList item={item} />
+                    ))}
+                </ul>
             </div>
+        </nav>
     )
 }
 
 export default Aside
 
 const MenuList = ({item}) => {
-    const tab = "Dashboard";
     return(
-        <li className={tab == item.name?"sidebar-item selected":"sidebar-item"}>
-            <Link to={item.link} className="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
-                <i className={item.icon}></i>
-                <span className="hide-menu">{item.name}</span>
+        <li className="nav-item">
+            <Link to={item.link} className="nav-link active" aria-current="page">
+              <span className="icon"><i className={item.icon}></i></span>
+              {item.name}
             </Link>
         </li>
     )

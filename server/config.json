@@ -32,5 +32,6 @@
 "facebook_clientId" : "342971417402058",
 "facebook_clientSecret" : "29c21c606be35fcd0df59424b19494d8",
 "facebook_callbackUrl" : "http://localhost:3000/auth/facebook/callback",
-"sendGrid_API": "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"
+"sendGrid_API": "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",
+"mongodb_URI": "mongodb+srv://76east:uyXCXzZY6gDJ7kKC@accounting-cluster.orprm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 }
