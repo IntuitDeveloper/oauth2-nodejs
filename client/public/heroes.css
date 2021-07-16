@@ -68,7 +68,7 @@ body {
 .bi {
   vertical-align: -.125em;
   fill: currentColor;
-  color:#3D467E;
+  color:#636273;
 }
 .h2-color {
 	color:#3D467E;
@@ -130,7 +130,7 @@ body {
 .hero1 {
     width: 100%;
     height: 100vh;
-    background: url(./images/hero-bg.png) top center no-repeat;
+    background: url(../img/hero-bg.png) top center no-repeat;
     background-size: cover;
 }
 .lh-1 {
@@ -183,7 +183,9 @@ body {
 .form-signin .form-floating:focus-within {
   z-index: 2;
 }
-
+.form-floating {
+	margin-bottom:1rem;
+}
 .form-signin input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
@@ -200,4 +202,165 @@ body {
 }
 .small-text {
 	font-size: 14px;
+}
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  /* rtl:raw:
+  right: 0;
+  */
+  bottom: 0;
+  /* rtl:remove */
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 48px 0 0; /* Height of navbar */
+  box-shadow: 1px 0px 20px rgb(0 0 0 / 8%);
+  background-color: rgb(250, 251, 255);
+  
+}
+
+@media (max-width: 767.98px) {
+  .sidebar {
+    top: 5rem;
+  }
+}
+
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #333;
+}
+
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: #727272;
+}
+
+.sidebar .nav-link.active {
+  color: #007bff;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: inherit;
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+/*
+ * Navbar
+ */
+
+.admin .navbar-brand {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: 1.3rem;
+  background-color: rgb(250, 251, 255);
+  
+}
+.admin .nav-link {    
+    padding: .7rem 1rem !important;
+}
+.admin .navbar .navbar-toggler {
+  top: .25rem;
+  right: 1rem;
+}
+
+.admin .navbar .form-control {
+  padding: .75rem 1rem;
+  border-width: 0;
+  border-radius: 0;
+}
+
+.form-control-dark {
+  color: #fff;
+  background-color: rgba(255, 255, 255, .1);
+  border-color: rgba(255, 255, 255, .1);
+}
+
+.form-control-dark:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+.sticky-top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+.feather {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+}
+.icons {
+      display: grid;
+      max-width: 100%;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr) );
+      gap: 1.25rem;
+    }
+    .icon {
+      background-color: var(--bs-light);
+      border-radius: .25rem;
+    }
+    .bi {
+      margin: .25rem;
+      font-size: 1.2rem;
+    }
+    .label {
+      font-family: var(--bs-font-monospace);
+    }
+    .label {
+      display: inline-block;
+      width: 100%;
+      overflow: hidden;
+      padding: .25rem;
+      font-size: .625rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+	
+	.admin .navbar-dark .navbar-brand {
+    color: rgba(0, 0, 0, 0.9);
+}
+.admin .bg-dark {
+    background-color: #fff !important;
+}
+.admin main {
+	background-color: #f2f4f5;
+}
+.card { 
+    border: 0px solid rgba(0,0,0,.125);
+    border-radius: .1rem;
+}
+.card-body {
+    padding: 1.25rem !important;
+}
+.table>:not(caption)>*>* {
+    padding: 1rem 1rem;
+}
+.footer {
+    padding: 15px 20px;
+}
+
+.admin .navbar-toggler {
+    background-color: #ccc;
+}
+.admin .navbar-dark .navbar-toggler {
+	border-color: #ccc
 }

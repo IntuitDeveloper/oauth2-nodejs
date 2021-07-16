@@ -3,52 +3,52 @@
         {
             "name": "Dashboard",
             "link": "#",
-            "icon": "mdi mdi-av-timer"
+            "icon": "bi bi-gear"
         },
         {
             "name": "Credit Card",
             "link": "#",
-            "icon": "mdi mdi-credit-card"
+            "icon": "bi bi-credit-card-2-back"
         },
         {
             "name": "Customers",
             "link": "#",
-            "icon": "mdi mdi-account-multiple"
+            "icon": "bi bi-people"
         },
         {
             "name": "Subscriptions & Plans",
             "link": "#",
-            "icon": "mdi mdi-view-grid"
+            "icon": "bi bi-kanban"
         },
         {
             "name": "Invoices",
             "link": "#",
-            "icon": "mdi mdi-view-list"
+            "icon": "bi bi-newspaper"
         },
         {
             "name": "Transactions",
             "link": "#",
-            "icon": "mdi mdi-view-sequential"
+            "icon": "bi bi-layout-text-sidebar-reverse"
         },
         {
             "name": "Products & Services",
             "link": "#",
-            "icon": "mdi mdi-format-list-bulleted"
+            "icon": "bi bi-collection"
         },
         {
             "name": "Reports",
             "link": "#",
-            "icon": "mdi mdi-chart-bar"
+            "icon": "bi bi-file-bar-graph"
         },
         {
             "name": "Configuration",
             "link": "#",
-            "icon": "mdi mdi-vector-combine"
+            "icon": "bi bi-intersect"
         },
         {
             "name": "Integrations",
             "link": "#",
-            "icon": "mdi mdi-server"
+            "icon": "bi bi-sim"
         }
     ],
     "payments":[
