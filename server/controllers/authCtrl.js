@@ -1,13 +1,16 @@
 const Users = require('../models/userModel')
-const {jwtToken, comparePassword, hashPassword} = require("../utils/token")
+const jwtToken = require("../utils/token")
 const sendEmail = require("../utils/send_mail")
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
+
 const authCtrl = {
     registerUser: async (req,res) => {
         try{
             const {email,password} = req.body;
             const user = await Users.findOne({username:email})
             if(user) return res.status(400).send({msg: `This email already exists`})
-            const passHash = await hashPassword(password);
+            const passHash = await bcrypt.hash(password, 10);
             const newUser = new Users({
                 username: email,
                 password: passHash,
@@ -19,21 +22,20 @@ const authCtrl = {
             res.status(500).send({msg: err.message})
         }
     },
-    loginUser: async  (req,res) => {
-        try{
-            const {email,password} = req.body;
-            const user = await Users.findOne({username:email})
-            if(!user) return res.status(400).send({msg: `User does not exist`})
-            // const isMatch = await comparePassword(password, user.password)
-            const isMatch = (password == user.password)?true:false;
-            if(!isMatch) return res.status(400).send({msg: `Wrong Password`})
-            const payload = {email: user.username, password : user.password};
-            const token = jwtToken.createToken(payload);
-            res.send({ success: true, token, user: login_user });
-        }catch(err){
-            res.status(500).send({msg: err.message})
-        }
-    },
+    loginUser: async (req, res, next) => {
+        passport.authenticate("local", (err, user, info) => {
+          if (err){
+            console.log("error heere")
+            throw err;
+          } 
+          if(!user){
+            res.json(info)
+          }
+          else {
+              res.json(user)
+          }
+        })(req, res, next);
+      },
     sendResetLink: async  (req, res) => {
         try{
             const { email } = req.body;

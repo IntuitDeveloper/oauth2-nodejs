@@ -12,12 +12,8 @@ router.get('/user', auth, (req, res) => {
 router.post('/getResetPassLink', authCtrl.sendResetLink);
 router.post('/reset-password',authCtrl.resetPassword)
 router.get('/logout', authCtrl.logoutUser);
-
-
-// Should be changed with passport-local
 router.post('/register', authCtrl.registerUser);
-router.post('/login', authCtrl.loginUser);
-// 
+router.post("/login", authCtrl.loginUser);
 
 
 router.get('/google/callback', 

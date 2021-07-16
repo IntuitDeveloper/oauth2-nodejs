@@ -4,7 +4,6 @@ const path = require('path');
 const session = require('express-session')
 const passport = require('passport')
 // 
-const AuthRouter = require('./routes/AuthRouter');
 // 
 const app = express();
 app.use(cors({ origin: "http://localhost:5500", credentials: true }))
@@ -12,6 +11,8 @@ app.use(cors({ origin: "http://localhost:5500", credentials: true }))
 require("./services/passport")
 require("./services/database")
 // 
+const AuthRouter = require('./routes/AuthRouter');
+
 app.use(express.json());
 app.use(session({secret: 'secret', resave: 'false', saveUninitialized: 'false'}))
 // 
@@ -27,7 +28,6 @@ passport.deserializeUser(function(obj, cb) {
 
 // Routes
 app.use('/auth', AuthRouter);
-
 
 
 

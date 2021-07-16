@@ -3,13 +3,17 @@ import axios from "axios";
 class AuthServices {
   static async loginWithEmailAndPassword(email,password) {
     const url = `/auth/login`;
-    const body = {email,password};
+    const body = {
+      email: email,
+      password: password
+    };
     const headers = {
         'Content-Type': 'application/json'
       }
     try {
         const apiResponse = await axios.post(url,body,{headers: headers});
-        console.log("login response = ",JSON.stringify(apiResponse.data));
+        console.log((apiResponse.data.success))
+        // console.log("login response = ",JSON.stringify(apiResponse.data));
         if(apiResponse.data.success)
         {
         localStorage.setItem('user', JSON.stringify(apiResponse.data.user))
