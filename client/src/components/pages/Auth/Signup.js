@@ -5,7 +5,7 @@ import Navbar from '../../common/Navbar';
 import '../../../assets/css/common.css'
 import Footer from "../../common/Footer"
 import {
-  getUserWithCookie,
+  signupAction,
 } from "../../../store/actions/AuthActions";
 import { connect } from "react-redux";
 
@@ -22,8 +22,7 @@ const Signup = (props) => {
         mNumber:''
     });
     const [errormsg , setErrormsg] = useState();
-  
-
+    const [successmsg , setSuccessmsg] = useState();
     const handleSignupSubmit = async(e) => {
       e.preventDefault();
       const validInput = (
@@ -34,27 +33,29 @@ const Signup = (props) => {
           inputDetails.company === '' ||
           inputDetails.mNumber === ''
         )
-
-
-
       if(!validInput){
-    //   await props.LoginWithEmailAndPassword(inputDetails.email, inputDetails.password);
-    //   var log_user = JSON.parse(localStorage.getItem("user"));        
-    //     if(log_user != null && log_user.email != null && log_user.email != "")
-    //     {
-    //       setErrormsg("");
-    //     history.push({ 
-    //       pathname: '/profile',
-    //       state: {"username" : log_user.email}
-    //      });
-    //     }
-    //     else
-    //     {
-    //       setErrormsg("Login Failed");
-    //     }
-      }else{
-        setErrormsg("Some fields are missing");
-      }
+        let body = {
+          "fName": inputDetails.fName,
+          "lName": inputDetails.lName,
+          "email": inputDetails.email,
+          "password": inputDetails.password,
+          "company": inputDetails.company,
+          "mNumber": inputDetails.mNumber
+        } 
+        const response = await props.signupAction(body);
+        console.log(response)
+        if(response.success == true){
+          // show user a message
+          setSuccessmsg(response.msg)
+          setTimeout(() => {
+          history.push("/login")
+          }, 4000);
+        }else{
+          setErrormsg(response.msg)
+        }
+        }else{
+          setErrormsg("Some fields are missing");
+        }
     }
   
     return (
@@ -144,6 +145,12 @@ const Signup = (props) => {
     />
       <label for="floatingInput">Mobile number</label>
     </div>
+    <label className="error_color">
+    {errormsg}
+      </label>	
+      <label className="success_color">
+    {successmsg}
+      </label>	
     </div>
 	<div className="text-center mb-3 mt-3">
     <button className="btn btn-primary btn-lg px-4 me-md-2" type="submit">Create Account</button>  
@@ -166,6 +173,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 export default connect(mapStateToProps, {
-  getUserWithCookie,
+  signupAction,
 })(Signup);
 

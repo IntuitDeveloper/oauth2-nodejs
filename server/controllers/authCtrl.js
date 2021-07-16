@@ -7,19 +7,32 @@ const passport = require('passport');
 const authCtrl = {
     registerUser: async (req,res) => {
         try{
-            const {email,password} = req.body;
+            const {
+                fName,
+                lName,
+                email,
+                password,
+                company,
+                mNumber
+            } = req.body;
             const user = await Users.findOne({username:email})
-            if(user) return res.status(400).send({msg: `This email already exists`})
+            if(user) return res.send({success: false, msg: `This email already exists`})
             const passHash = await bcrypt.hash(password, 10);
             const newUser = new Users({
+                firstName: fName,
+                lastName: lName,
+                email: email,
                 username: email,
                 password: passHash,
-                created: Date.now()
+                details: {
+                    company: company,
+                    mobile: mNumber
+                }
             })
             await newUser.save()
-            res.status(200).send({msg: `Signup Success`})
+            res.status(200).send({success: true ,msg: `Signup Success. Email verification link sent to mail.`})
         }catch(err){
-            res.status(500).send({msg: err.message})
+            res.send({success: false, msg: err.message})
         }
     },
     loginUser: async (req, res, next) => {

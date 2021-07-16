@@ -1,6 +1,18 @@
 import axios from "axios";
 
 class AuthServices {
+  static async signup(body) {
+    const url = `/auth/signup`;
+    const headers = {
+        'Content-Type': 'application/json'
+      }
+    const response  = await axios.post(url,body,{headers: headers});
+      // if(response.statusCode)
+    return response.data;
+      
+  }
+
+
   static async loginWithEmailAndPassword(email,password) {
     const url = `/auth/login`;
     const body = {

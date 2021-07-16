@@ -28,7 +28,7 @@ const Navbar = () => {
                 <Link to="/login" className="nav-link" href="signin.html">Sign In</Link>
             </li>
             <li className="nav-item" style={{paddingLeft:"20px"}}>
-                <Link to="#" className="nav-link" >Create Free Account</Link>
+                <Link to="/signup" className="nav-link" >Create Free Account</Link>
             </li>
         </ul>
     </div>

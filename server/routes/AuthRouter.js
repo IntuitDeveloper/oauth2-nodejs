@@ -12,7 +12,7 @@ router.get('/user', auth, (req, res) => {
 router.post('/getResetPassLink', authCtrl.sendResetLink);
 router.post('/reset-password',authCtrl.resetPassword)
 router.get('/logout', authCtrl.logoutUser);
-router.post('/register', authCtrl.registerUser);
+router.post('/signup', authCtrl.registerUser);
 router.post("/login", authCtrl.loginUser);
 
 

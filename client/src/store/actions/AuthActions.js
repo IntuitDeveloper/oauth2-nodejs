@@ -10,7 +10,18 @@ import {
   
   import AuthServices from "../../services/AuthServices";
   
-  
+  export function signupAction(body) {
+    return async (dispatch) => {
+    const response = await AuthServices.signup(body);
+      return response
+    // dispatch({
+    //   type: SET_USER_DATA,
+    //   payload: response,
+    // });
+    }
+}
+
+
   export function LoginWithEmailAndPassword(email, password) {
     return async (dispatch) => {
       dispatch({
