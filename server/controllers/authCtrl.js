@@ -17,22 +17,31 @@ const authCtrl = {
                 company,
                 mNumber
             } = req.body;
-            const user = await Users.findOne({username:email})
+            const user = await Users.findOne({email: email})
             if(user) return res.send({success: false, msg: `This email already exists`})
-            const passHash = await bcrypt.hash(password, 10);
-            const newUser = new Users({
-                firstName: fName,
-                lastName: lName,
-                email: email,
-                username: email,
-                password: passHash,
-                details: {
-                    company: company,
-                    mobile: mNumber
-                }
-            })
-            await newUser.save()
-            res.status(200).send({success: true ,msg: `Signup Success. Email verification link sent to mail.`})
+
+            const token = await jwt.sign({fName,
+                lName,
+                email,
+                password,
+                company,
+                mNumber},config.JWT_SECRET || '',{ expiresIn: '20m' });
+            const link = `${req.protocol}://localhost:3000/auth/activate-account/?token=${token}`;
+            
+            const  resp = await sendEmail(
+                email,
+                'ankitmyself2017@gmail.com',
+                'Account Activation Link',
+                `
+                <div>Click the link below to activate your account.</div><br/>
+                <div>${link}</div>
+                `
+            );
+            if(resp != true){
+                throw new Error(resp);
+            }else{
+            res.status(200).send({success: true ,msg: `Email verification link sent to mail.`})
+          }
         }catch(err){
             res.send({success: false, msg: err.message})
         }
@@ -40,7 +49,6 @@ const authCtrl = {
     loginUser: async (req, res, next) => {
         passport.authenticate("local", (err, user, info) => {
           if (err){
-            console.log("error heere")
             throw err;
           } 
           if(!user){
@@ -98,6 +106,42 @@ const authCtrl = {
         }catch(err){
             return  res.status(401).send({success: false, msg: err.message})
         }
+    },
+    activateAccount: async (req,res) => {
+        const token = req.query.token;
+        if(!token){
+            return res.status(401).send({success: false, msg:  "Token Missing" })
+        }
+        try{
+            const decoded = await jwt.verify(token, config.JWT_SECRET);
+            const {
+                fName,
+                lName,
+                email,
+                password,
+                company,
+                mNumber
+            } = decoded;
+            const user = await Users.findOne({email: email})
+            if(user) return res.status(401).send({success: false, msg: `This email already exists`})
+            const passHash = await bcrypt.hash(password, 10);
+            const newUser = new Users({
+                firstName: fName,
+                lastName: lName,
+                email: email,
+                username: email,
+                password: passHash,
+                details: {
+                    company: company,
+                    mobile: mNumber
+                }
+            })
+            await newUser.save()
+            // res.status(200).send({success: true ,msg: `Signup Success.`})
+            res.redirect('http://localhost:5500/login');
+            }catch(err){
+                return  res.status(401).send({success: false, msg: err.message})
+            }
     },
     logoutUser: async  (req, res) => {
         req.logout();

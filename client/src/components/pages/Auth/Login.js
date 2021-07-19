@@ -22,26 +22,28 @@ const Login = (props) => {
       password:''
     });
     const [errormsg , setErrormsg] = useState();
-  
+    const [successmsg , setSuccessmsg] = useState();
+
 
     const handleLoginSubmit = async(e) => {
       e.preventDefault();
       Cookies.remove("connect.sid");
       if(inputDetails.email != '' && inputDetails.password != ''){
-      await props.LoginWithEmailAndPassword(inputDetails.email, inputDetails.password);
-      var log_user = JSON.parse(localStorage.getItem("user"));        
-        if(log_user != null && log_user.email != null && log_user.email != "")
-        {
-          setErrormsg();
+      const response = await props.LoginWithEmailAndPassword(inputDetails.email, inputDetails.password);
+      if(response.success === true){
+      var log_user = JSON.parse(localStorage.getItem("user"));     
+        if(log_user != null && log_user.email != null && log_user.email != ""){
+        setErrormsg()
+        setSuccessmsg(response.msg)
         history.push({ 
           pathname: '/profile',
           state: {"username" : log_user.email}
          });
         }
-        else
-        {
-          setErrormsg("Login Failed");
-        }
+      }else{
+        setSuccessmsg()
+        setErrormsg(response.msg)
+      }
       }
     }
   
@@ -105,7 +107,9 @@ const Login = (props) => {
     <label className="error_color">
     {errormsg}
       </label>	
-    
+      <label className="success_color">
+    {successmsg}
+      </label>
    
     <div className="checkbox mb-3">
       <label>

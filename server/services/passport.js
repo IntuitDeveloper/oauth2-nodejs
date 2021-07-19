@@ -13,12 +13,12 @@ passport.use(new LocalStrategy(
     },
     async (username, password, done) => {
         const user = await Users.findOne({ username: username });
-        if (!user) return done(null, false, { success: false, message: "User Not Found" });
+        if (!user) return done(null, false, { success: false, msg: "User Not Found. If you have signed-up, kindly verify your email first." });
         const isMatch = await bcrypt.compare(password, user.password);
-        if(!isMatch)  return done(null,false, {success: false, type: 'password', message: 'Password did not match' });
+        if(!isMatch)  return done(null,false, {success: false, type: 'password', msg: 'Password did not match' });
         const payload = {email: user.username, password : user.password}
         const token = await jwtToken.createToken(payload);
-        return done(null, { success: true, token, user: user })
+        return done(null, { success: true, token, user: user, msg: "Success" })
     })
 );
 

@@ -35,6 +35,7 @@ import {
     dispatch({
       type: LOGIN_SUCCESS,
     });
+    return response;
     }
 }
   export function getUserWithCookie() {
