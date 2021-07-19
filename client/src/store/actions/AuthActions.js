@@ -56,6 +56,7 @@ import {
   export function sendResetLinkToEmail(email) {
     return async (dispatch) => {
       const response = await AuthServices.sendResetLinkToEmail(email);
+      return response;
       // dispatch({
       //   type: RESET_PASSWORD,
       //   payload: email
@@ -65,6 +66,7 @@ import {
   export function resetPassword(password,confirmPassword,token) {
     return async (dispatch) => {
       const response = await AuthServices.resetPassword(password,confirmPassword,token);
+      return response;
       // dispatch({
       //   type: RESET_PASSWORD,
       //   payload: email

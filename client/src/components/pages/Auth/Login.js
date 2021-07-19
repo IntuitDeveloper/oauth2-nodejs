@@ -32,7 +32,7 @@ const Login = (props) => {
       var log_user = JSON.parse(localStorage.getItem("user"));        
         if(log_user != null && log_user.email != null && log_user.email != "")
         {
-          setErrormsg("");
+          setErrormsg();
         history.push({ 
           pathname: '/profile',
           state: {"username" : log_user.email}

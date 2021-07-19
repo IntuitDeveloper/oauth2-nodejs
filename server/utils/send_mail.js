@@ -10,13 +10,9 @@ module.exports =  sendEmail = async (receiver, source, subject, content) => {
         subject,
         html: content,
       };
-     await sgMail.send(msg)
-          .then(() => {
-            console.log('Email sent')
-            return "Success"
-          })
-          .catch((error) => {
-            console.error(error)
-            return error
-          })
+      const response = await sgMail.send(msg);
+      if(!response === false){
+        return true;
+      }
+      return false;
   };

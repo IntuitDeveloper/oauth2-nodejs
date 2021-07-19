@@ -7,7 +7,7 @@ import {
   resetPassword,
 } from "../../../store/actions/AuthActions";
 import { connect } from "react-redux";
-
+import '../../../assets/css/common.css'
 
 
 const Login = (props) => {
@@ -19,6 +19,7 @@ const Login = (props) => {
         confirmPassword: ''
     });
     const [errormsg , setErrormsg] = useState();
+    const [successmsg , setSuccessmsg] = useState();
   
 
     const handleReset = async(e) => {
@@ -26,7 +27,17 @@ const Login = (props) => {
       if(resetDetails.password != '' && resetDetails.confirmPassword != ''){
         //history.push("/profile")
         console.log(resetDetails)
-        props.resetPassword(resetDetails.password,resetDetails.confirmPassword,token)
+        const response = await props.resetPassword(resetDetails.password,resetDetails.confirmPassword,token);
+        if(response.success == true){
+          setErrormsg()
+          setSuccessmsg(response.msg)
+          setTimeout(() => {
+            history.push("/login")
+            }, 4000);
+        }else{
+          setSuccessmsg()
+          setErrormsg(response.msg)
+        }
       }
     }
 
@@ -63,6 +74,9 @@ const Login = (props) => {
     <label className="error_color">
     {errormsg}
       </label>	
+      <label className="success_color">
+    {successmsg}
+      </label>
 	<div className="text-center">
     <button className="btn btn-primary btn-lg px-4 me-md-2 btn-custom-style" type="submit">Change Password</button>  
 	</div>

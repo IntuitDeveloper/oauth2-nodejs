@@ -7,21 +7,26 @@ import {
   sendResetLinkToEmail,
 } from "../../../store/actions/AuthActions";
 import { connect } from "react-redux";
-
+import '../../../assets/css/common.css'
 
 
 const Login = (props) => {
     const history = useHistory();
     const [forgotEmail,setForgotEmail] = useState('');
     const [errormsg , setErrormsg] = useState();
+    const [successmsg , setSuccessmsg] = useState();
   
 
     const handleMailSend = async(e) => {
       e.preventDefault();
       if(forgotEmail != ''){
-        //history.push("/profile")
         console.log(forgotEmail)
-        props.sendResetLinkToEmail(forgotEmail);
+        const response = await props.sendResetLinkToEmail(forgotEmail);
+        if(response.success == true){
+          setSuccessmsg(response.msg)
+        }else{
+          setErrormsg(response.msg)
+        }
       }
     }
 
@@ -47,6 +52,9 @@ const Login = (props) => {
     <label className="error_color">
     {errormsg}
       </label>	
+      <label className="success_color">
+    {successmsg}
+      </label>
 	<div className="text-center">
     <button className="btn btn-primary btn-lg px-4 me-md-2 btn-custom-style" type="submit">Send Reset Link</button>  
 	</div>

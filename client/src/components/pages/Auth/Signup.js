@@ -46,11 +46,13 @@ const Signup = (props) => {
         console.log(response)
         if(response.success == true){
           // show user a message
+          setErrormsg()
           setSuccessmsg(response.msg)
           setTimeout(() => {
           history.push("/login")
           }, 4000);
         }else{
+          setSuccessmsg()
           setErrormsg(response.msg)
         }
         }else{

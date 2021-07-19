@@ -52,7 +52,7 @@ static async sendResetLinkToEmail(email) {
   try {
     const response = await axios.post(url,body);
       console.log(response)
-      return response
+      return response.data
   } catch (err) {
     console.log(err.message);
   }
@@ -68,7 +68,7 @@ static async resetPassword(password,confirmPassword,token) {
   try {
     const response = await axios.post(url,body);
       console.log(response)
-      return response
+      return response.data
   } catch (err) {
     console.log(err.message);
   }

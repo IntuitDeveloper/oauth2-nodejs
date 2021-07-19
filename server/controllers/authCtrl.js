@@ -1,8 +1,10 @@
 const Users = require('../models/userModel')
-const jwtToken = require("../utils/token")
+// const jwtToken = require("../utils/token")
 const sendEmail = require("../utils/send_mail")
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const config = require("../config.json")
 
 const authCtrl = {
     registerUser: async (req,res) => {
@@ -53,15 +55,13 @@ const authCtrl = {
         try{
             const { email } = req.body;
             if (!email) {
-                return res.status(400).send({ error: 'Email is required' });
+                return res.status(400).send({success: false, msg: 'Email is required' });
             }
-            // const user = await User.findOne({ where: { email } });
-            // if (!user) {
-            //   return res.status(404).send({ error: 'User not found' });
-            // }
-            // const token = jwtToken.createToken(user);
-            // const link = `${req.protocol}://localhost:5000/reset_password/${token}`;
-            const token = "hii76east";
+            const user = await Users.findOne({ email: email });
+            if (!user) {
+              return res.status(404).send({ success: false, msg: 'User not found' });
+            }
+            const token = await jwt.sign({email: user.email},config.JWT_SECRET || '',{ expiresIn: '20m' });
             const link = `${req.protocol}://localhost:5500/reset-password/${token}`;
             const  resp = await sendEmail(
                 email,
@@ -72,34 +72,32 @@ const authCtrl = {
                 <div>${link}</div>
                 `
             );
-            if(resp != 'Success'){
+            if(resp != true){
                 throw new Error(resp);
             }else{
-                return res.status(200).send({ message: 'Password reset link has been successfully sent to your inbox' });
+                return res.status(200).json({success: true, msg: 'Password reset link has been successfully sent to your mail' });
             }
         }catch(err) {
-            res.status(500).send({msg: err.message})
+            res.status(500).send({success: false, msg: err.message})
         }
     },
     resetPassword: async  (req, res) => {
         const { password, confirmPassword, token } = req.body;
-        console.log(password, confirmPassword, token);
-        if(password != confirmPassword){
-            return res.status(406).send({err: "Password and Confirm-Password should be same." })
+        if(!token){
+            return res.status(401).send({success: false, msg:  "Reset Token Missing" })
         }
-        // const decoded = jwtToken.verifyToken(token);
-        // const hash = hashPassword(password);
-        // const updatedUser = await User.update(
-        //   { password: hash },
-        //   {
-        //     where: { id: decoded.userId },
-        //     returning: true,
-        //     plain: true,
-        //   }
-        // );
-        // const { id, name, email } = updatedUser[1];
-        // return res.status(200).send({ token, user: { id, name, email } });
-        return res.status(200).send({ msg: "Password changed!"});
+        if(password != confirmPassword){
+            return res.status(406).send({success: false, msg: "Password and Confirm-Password should be same." })
+        }
+        try{
+        const decoded = await jwt.verify(token, config.JWT_SECRET);
+        const hash = await bcrypt.hash(password, 10);
+        const updatedUser = await Users.findOneAndUpdate({email: decoded.email}, {password: hash},{new: true});
+        console.log(updatedUser)
+        return res.status(200).send({success: true, msg: "Password changed. Please Login."});
+        }catch(err){
+            return  res.status(401).send({success: false, msg: err.message})
+        }
     },
     logoutUser: async  (req, res) => {
         req.logout();

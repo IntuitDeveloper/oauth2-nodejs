@@ -8,11 +8,11 @@ module.exports = jwtToken = {
     return jwt.sign(
       payload,
       config.JWT_SECRET || '',
-      { expiresIn: 30000 }
+      { expiresIn: '20m' }
     );
   },
   verifyToken(token) {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET, { expiresIn: '24h' });
+    const decoded = jwt.verify(token, config.JWT_SECRET, { expiresIn: '24h' });
     return decoded;
   }
 };
