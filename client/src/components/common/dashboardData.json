@@ -2,12 +2,12 @@
     "aside-menu":[
         {
             "name": "Dashboard",
-            "link": "#",
+            "link": "dashboard",
             "icon": "bi bi-gear"
         },
         {
             "name": "Credit Card",
-            "link": "#",
+            "link": "credit-card",
             "icon": "bi bi-credit-card-2-back"
         },
         {

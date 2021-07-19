@@ -13,7 +13,8 @@ import Login from './components/pages/Auth/Login'
 import Signup from './components/pages/Auth/Signup'
 import Landing from './components/pages/Landing'
 import PrivateRoute from "./PrivateRoute";
-import Dashboard from './components/pages/Dashboard/Dashboard';
+import Dashboard from './components/pages/Dashboard';
+import CreditCard from './components/pages/CreditCard';
 const App = ()=> {
   // useEffect(() =>{
   //   const checkLogin = async () =>{
@@ -36,16 +37,20 @@ const App = ()=> {
     <Router>
       <div className="App">
         <Switch>
+
           <Route exact path="/" component={Landing} />
+          <Route exact path="/dashboard" component={Dashboard}/>
+          <Route exact path="/credit-card" component={CreditCard}/>
+          <Route exact path="/profile" component={Profile}/>
+          {/* <PrivateRoute exact path="/profile" component={Profile}/> */}
+
           <Route exact path="/login"><Login /></Route>
           <Route exact path="/signup"><Signup /></Route>
           <Route exact path="/login/error">Error logging in!</Route>
           <Route exact path="/login/success" component={LoginSuccess}/>
-          <Route exact path="/profile" component={Profile}/>
-          {/* <PrivateRoute exact path="/profile" component={Profile}/> */}
           <Route exact path="/forgot-password" component={ForgotPassword}/>
           <Route path="/reset-password/:token" component={ResetPassword}/>
-          <Route exact path="/dashboard" component={Dashboard}/>
+
         </Switch>
       </div>
     </Router>
